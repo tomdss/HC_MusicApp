@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:background="@drawable/background_play"
+    android:gravity="center"
+    android:padding="5dp"
+    >
+
+    <ImageView
+        android:layout_marginRight="10dp"
+        android:id="@+id/im_shuffle"
+        android:src="@drawable/bg_shuffle"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+    <ImageView
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/im_previous"
+        android:src="@drawable/ic_skip_previous"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:id="@+id/im_play"
+        android:src="@drawable/bg_play"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        />
+
+    <ImageView
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="30dp"
+        android:id="@+id/im_next"
+        android:src="@drawable/ic_skip_next"
+        android:layout_width="40dp"
+        android:layout_height="40dp" />
+
+    <ImageView
+        android:layout_marginLeft="10dp"
+        android:id="@+id/im_repeat"
+        android:src="@drawable/bg_repeat"
+        android:layout_width="30dp"
+        android:layout_height="30dp" />
+
+
+</LinearLayout>

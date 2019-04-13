@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="4dp"
+    android:layout_marginRight="5dp"
+    android:layout_marginLeft="5dp"
+    android:layout_marginBottom="1dp"
+    android:elevation="10dp"
+    app:cardCornerRadius="8dp"
+
+    >
+
+    <LinearLayout
+        android:background="@drawable/bg_item_song"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp"
+        >
+
+        <TextView
+            android:id="@+id/text_view_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Hope"
+            android:textColor="#fcfcfc"
+            android:textSize="20dp"
+            android:paddingLeft="10dp"
+            android:maxLines="1"
+            android:ellipsize="end"
+            />
+
+        <TextView
+            android:id="@+id/text_view_singer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Lil Knight"
+            android:textColor="#BEFCFCFC"
+            android:textSize="15dp"
+            android:paddingLeft="10dp"
+            android:paddingTop="1dp"
+            />
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>
