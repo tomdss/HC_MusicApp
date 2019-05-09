@@ -1,6 +1,7 @@
 package com.t3h.hc_musicapp.manager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -9,7 +10,9 @@ import android.media.MediaPlayer;
 import android.net.Uri;
 import android.provider.MediaStore;
 
+import com.t3h.hc_musicapp.MainActivity;
 import com.t3h.hc_musicapp.model.Song;
+import com.t3h.hc_musicapp.service.MusicService;
 
 import java.io.IOException;
 import java.text.SimpleDateFormat;

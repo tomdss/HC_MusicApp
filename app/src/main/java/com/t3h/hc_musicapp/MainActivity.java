@@ -1,16 +1,20 @@
 package com.t3h.hc_musicapp;
 
 import android.Manifest;
+import android.content.ComponentName;
+import android.content.Intent;
+import android.content.ServiceConnection;
 import android.content.pm.PackageManager;
 
-import android.graphics.drawable.BitmapDrawable;
-import android.media.MediaPlayer;
+import android.databinding.DataBindingUtil;
 import android.os.AsyncTask;
+import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.View;
 import android.widget.ImageView;
 import android.widget.RelativeLayout;
@@ -19,14 +23,18 @@ import android.widget.TextView;
 
 
 import com.t3h.hc_musicapp.adapter.SongAdapter;
+import com.t3h.hc_musicapp.databinding.ActivityMainBinding;
 import com.t3h.hc_musicapp.manager.MediaManager;
 import com.t3h.hc_musicapp.model.Song;
+import com.t3h.hc_musicapp.service.MusicService;
+import com.t3h.hc_musicapp.service.MyService;
+import com.t3h.hc_musicapp.service.ServiceConnectionListener;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements View.OnClickListener, SongAdapter.SongListener, SeekBar.OnSeekBarChangeListener {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener, SongAdapter.SongListener, SeekBar.OnSeekBarChangeListener, ServiceConnectionListener {
 
     private static final int LEVEL_SHUFFLE_OFF = 0;
     private static final int LEVEL_SHUFFLE_ON = 1;
@@ -50,6 +58,9 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     private SeekBar sbSong;
     private int progressSeekBar;
 
+    private ActivityMainBinding binding;
+    private MyService service;
+
 
 //    private int levelShuffle = LEVEL_SHUFFLE_OFF;
 //    private int levelRepeat = LEVEL_REPEAT_OFF;
@@ -63,7 +74,8 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+//        setContentView(R.layout.activity_main);
+        binding = DataBindingUtil.setContentView(this,R.layout.activity_main);
 
 
         getSupportActionBar().hide();
@@ -89,12 +101,13 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         mediaManager = new MediaManager(this);
         listSong = mediaManager.getListSong();
 
+
     }
 
     private void initViews() {
 
-        lvListMusic=findViewById(R.id.lv_list_music);
-
+//        lvListMusic=findViewById(R.id.lv_list_music);
+//
         tvNameSong = findViewById(R.id.tv_name_song);
         tvSinger = findViewById(R.id.tv_singer);
         tvSerial = findViewById(R.id.tv_serial);
@@ -115,7 +128,7 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
         songAdapter = new SongAdapter(this,listSong);
 
-        lvListMusic.setAdapter(songAdapter);
+        binding.lvListMusic.setAdapter(songAdapter);
 
         songAdapter.setListener(this);
 
@@ -123,17 +136,35 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         sbSong.setMax(mediaManager.getCurrentSong().getDuration());
         sbSong.setOnSeekBarChangeListener(this);
 
-
+        binding.setListener(this);
 
 //        media = MediaPlayer.create(this, Uri.parse(listSong.get(0).getPath()));
 
     }
 
+
+    private ServiceConnection connection = new ServiceConnection() {
+        @Override
+        public void onServiceConnected(ComponentName name, IBinder service) {
+            Log.e(getClass().getName(),"onServiceConnected");
+            MyService.MyBinder binder = (MyService.MyBinder) service;
+            MainActivity.this.service = binder.getService();
+
+        }
+
+        @Override
+        public void onServiceDisconnected(ComponentName name) {
+
+            Log.e(getClass().getName(),"onServiceDisconnected");
+        }
+    };
+
+
     private void updateSong(){
 
         Song song = mediaManager.getCurrentSong();
         setInfoSong(song);
-        lvListMusic.getLayoutManager().scrollToPosition(mediaManager.getPositionSong());
+        binding.lvListMusic.getLayoutManager().scrollToPosition(mediaManager.getPositionSong());
 
         new UpdateSeekBarSong().execute();
 
@@ -324,6 +355,10 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
 
     }
 
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
 
 
     private class UpdateSeekBarSong extends AsyncTask<Void,Void,Void>{
@@ -352,5 +387,17 @@ public class MainActivity extends AppCompatActivity implements View.OnClickListe
         }
     }
 
+    @Override
+    protected void onStop() {
+        super.onStop();
+        Intent intent = new Intent(this, MusicService.class);
+        startService(intent);
+    }
+
+    @Override
+    protected void onDestroy() {
+
+        super.onDestroy();
+    }
 
 }

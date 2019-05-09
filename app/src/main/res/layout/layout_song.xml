@@ -1,77 +1,73 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:padding="16dp"
-    android:orientation="vertical"
-    android:background="@drawable/background_song"
-    >
+<layout>
 
-    <ImageView
-        android:id="@+id/im_song"
-        android:layout_width="50dp"
-        android:layout_height="50dp"
+    <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
         android:background="@drawable/background_song"
-        android:layout_marginRight="10dp"
-        android:src="@drawable/ic_music"
-        />
+        android:orientation="vertical"
+        android:padding="16dp">
 
-    <TextView
-        android:layout_toRightOf="@id/im_song"
-        android:id="@+id/tv_name_song"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Love Yourself"
-        android:maxLines="1"
-        android:ellipsize="end"
-        android:textSize="19sp"
-        android:textColor="#EEEEEE"
-        />
-    <TextView
-        android:layout_alignLeft="@id/tv_name_song"
-        android:layout_below="@id/tv_name_song"
-        android:id="@+id/tv_singer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Justin Bieber"
-        android:textSize="14sp"
-        android:textColor="#C1EEEEEE"
-        />
-    <RelativeLayout
-
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_above="@id/sb_song"
-        android:layout_marginBottom="5dp"
-        >
+        <ImageView
+            android:id="@+id/im_song"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_marginRight="10dp"
+            android:background="@drawable/background_song"
+            android:src="@drawable/ic_music" />
 
         <TextView
-            android:id="@+id/tv_serial"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_name_song"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="1/149"
+            android:layout_toRightOf="@id/im_song"
+            android:ellipsize="end"
+            android:maxLines="1"
+            android:text="Love Yourself"
             android:textColor="#EEEEEE"
-            />
+            android:textSize="19sp" />
 
         <TextView
-            android:id="@+id/tv_duration"
-            android:layout_width="wrap_content"
+            android:id="@+id/tv_singer"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="00:00/00:00"
-            android:textColor="#EEEEEE"
-            android:layout_alignParentRight="true"
-            />
+            android:layout_below="@id/tv_name_song"
+            android:layout_alignLeft="@id/tv_name_song"
+            android:text="Justin Bieber"
+            android:textColor="#C1EEEEEE"
+            android:textSize="14sp" />
 
+        <RelativeLayout
+
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_above="@id/sb_song"
+            android:layout_marginBottom="5dp">
+
+            <TextView
+                android:id="@+id/tv_serial"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="1/149"
+                android:textColor="#EEEEEE" />
+
+            <TextView
+                android:id="@+id/tv_duration"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:text="00:00/00:00"
+                android:textColor="#EEEEEE" />
+
+
+        </RelativeLayout>
+
+        <SeekBar
+            android:id="@+id/sb_song"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true" />
 
 
     </RelativeLayout>
-    <SeekBar
-        android:id="@+id/sb_song"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        />
-
-
-</RelativeLayout>
+</layout>
